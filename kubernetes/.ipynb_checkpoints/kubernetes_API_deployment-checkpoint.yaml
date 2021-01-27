@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app: placement-classifier-ml-api
+    name: placement-classifier-ml
+    namespace: fastapi-app-dev
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: placement-classifier
+    template:
+        metadata:
+            labels:
+                app: placement-classifier
+        spec:
+            containers:
+            - image: kumarvc/fastapi-placement-classifier:1.0.2
+              imagePullPolicy: IfNotPresent
+              name: placement-classifier-container
+              ports:
+              - containerPort: 80
+            imagePullSecrets:
+            - name: registry-credentials

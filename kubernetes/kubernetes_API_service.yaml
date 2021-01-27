@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+    labels:
+        app: placement-classifier-svc
+    name: placement-classifier-svc
+    namespace: fastapi-app-dev
+spec:
+    ports:
+    - name: predict
+      nodePort: 30000
+      port: 80
+      targetPort: 80
+    selector:
+      app: placement-classifier
+    type: NodePort
